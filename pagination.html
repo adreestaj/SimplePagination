@@ -1,0 +1,97 @@
+<style>
+    .pagination {
+        display: inline-block;
+    }
+    
+    .pagination a {
+        float: left;
+        padding: 8px 25px;
+        text-decoration: none;
+        color: #848789;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
+    }
+    
+    .pagination a.active {
+        /*    // background-color: #719E19; */
+        color: #719E19;
+    }
+</style>
+
+
+
+    <div class="container">
+        <%--CHANNELS Section--%>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="cart">
+                            <div class="form">
+                                <div class="row">
+                                    <div class=" col-sm-8">
+                                        <div class="default-section-title">
+
+                                        </div>
+                                    </div>
+                                    <div class="search-field input-field col-sm-4">
+                                        <input type="text" id="search" placeholder="Search by channel name" ng-model="channelsSearchValue">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="ng-binding ">CHANNEL NO
+                                <a href="#" ng-click="reverse =!reverse" class="fa fa-sort"></a>
+                            </th>
+                            <th scope="row" class="ng-binding ">CHANNEL NAME</th>
+                            <th scope="row" class="ng-binding "> LANGUAGE</th>
+                        </tr>
+                        <tr ng-repeat="channel in $ctrl.filteredChannels| orderBy:'channelNo':reverse">
+                            <td scope="row"><i class="fa fa-users"></i> <strong>{{channel.channelNo}}</strong></td>
+                            <!-- end ngIf: $root.currentLanguage == 'en' -->
+                            <td scope="row"><strong>{{channel.channelName}}</strong></td>
+                            <td scope="row"><strong>{{channel.language}}</strong></td>
+                            <!-- end ngIf: $root.currentLanguage == 'en' -->
+
+                        </tr>
+
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+
+                </table>
+                <div class="row">
+                    <div ng-if="!seeAll" class="pagination">
+                        <span>Page {{selectedPage}} of  {{pages}}</span>
+                    </div>
+                    <div ng-if="!seeAll" style="font-size:18px;float: right;" class="pagination">
+                        <a ng-if="showMoveLeft" ng-click="onClickLeftArrow()" href="#" style='font-size: 33px;' class="fa fa-long-arrow-left"></a>
+                        <a href="#" ng-class="{active:page+1==selectedPage}" ng-repeat="page  in [] | range:pages| limitTo:4:startPage" ng-click="getFilteredChannels(page+1)">{{page+1}}</a>
+
+                        <a ng-if="showMoveRight" ng-click="onClickRightArrow()" href="#" style='font-size: 33px;' class="fa fa-long-arrow-right"></a>
+                        <a href="#" scope="row" class="ng-binding " ng-click="onClickSeeAll()">SEE ALL </a>
+
+                    </div>
+                    <div ng-if="seeAll" style="font-size:18px;float: right;" class="pagination">
+
+                        <a href="#" scope="row" class="ng-binding " ng-click="onClickSeeLess()">SEE LESS </a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <span>*Note: This channel list might be change without prior notice</span>
+            </div>
+
+    </div>
